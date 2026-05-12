@@ -43,21 +43,48 @@
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
+                
+                <li class="sidebar-title">Menu</li>
+
                 <li class="sidebar-item ">
                     <a href="" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
-
-                <li class="sidebar-title">Menu</li>
-
+                
                 <li class="sidebar-item  {{ Request::routeIs('admin.user.index') ? 'active' : '' }}">
                     <a href="{{ route('admin.user.index') }}" class='sidebar-link'>
                         <i class="bi bi-person-fill"></i>
-                        <span>Profil</span>
+                        <span>User</span>
                     </a>
                 </li>
+                
+                <li class="sidebar-title">Master</li>
+                <li
+                        class="sidebar-item {{ Request::routeIs('satuan.*', 'barang.*', 'kategori.*') ? 'active' : '' }} has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-box2-fill"></i>
+                            <span>Barang</span>
+                        </a>
+                        <ul class="submenu">
+                            <li class="submenu-item {{ Route::is('satuan.*') ? 'active' : '' }} ">
+                                <a href="{{ route('satuan.index') }}" class='submenu-link'>
+                                    Satuan
+                                </a>
+                            </li>
+                            <li class="submenu-item {{ Route::is('kategori.*') ? 'active' : '' }} ">
+                                <a href="{{ route('kategori.index') }}" class='submenu-link'>
+                                    Kategori
+                                </a>
+                            </li>
+                            <li class="submenu-item  {{ Route::is('barang.*') ? 'active' : '' }}">
+                                <a href="{{ route('barang.index') }}" class='submenu-link'>
+                                    Barang
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
             </ul>
         </div>

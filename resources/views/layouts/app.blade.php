@@ -27,12 +27,12 @@
     <script src="{{ asset('static/js/initTheme.js') }}"></script>
     <div id="app">
         @include('components.sidebar')
-        <div id="main">
+        <div id="main" class="layout-navbar navbar-fixed">
             @include('components.navbar')
-
-            @yield('main')
-
-            @include('components.footer')
+            <div id="main-content">
+                @yield('main')
+                @include('components.footer')
+            </div>
         </div>
     </div>
     <script src="{{ asset('static/js/components/dark.js') }}"></script>
@@ -40,13 +40,6 @@
 
 
     <script src="{{ asset('js/app.js') }}"></script>
-
-
-
-    <!-- Need: Apexcharts -->
-    {{-- <script src="{{ asset('extensions/apexcharts/apexcharts.min.js') }}"></script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="{{ asset('static/js/pages/dashboard.js') }}"></script> --}}
 
     {{-- Library Jquery --}}
     <script src="{{ asset('extensions/jquery/jquery.min.js') }}"></script>
