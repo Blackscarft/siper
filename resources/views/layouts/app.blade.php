@@ -31,8 +31,8 @@
             @include('components.navbar')
             <div id="main-content">
                 @yield('main')
-                @include('components.footer')
             </div>
+            @include('components.footer')
         </div>
     </div>
     <script src="{{ asset('static/js/components/dark.js') }}"></script>

@@ -62,29 +62,50 @@
                 
                 <li class="sidebar-title">Master</li>
                 <li
-                        class="sidebar-item {{ Request::routeIs('satuan.*', 'barang.*', 'kategori.*') ? 'active' : '' }} has-sub">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-box2-fill"></i>
-                            <span>Barang</span>
-                        </a>
-                        <ul class="submenu">
-                            <li class="submenu-item {{ Route::is('satuan.*') ? 'active' : '' }} ">
-                                <a href="{{ route('satuan.index') }}" class='submenu-link'>
-                                    Satuan
-                                </a>
-                            </li>
-                            <li class="submenu-item {{ Route::is('kategori.*') ? 'active' : '' }} ">
-                                <a href="{{ route('kategori.index') }}" class='submenu-link'>
-                                    Kategori
-                                </a>
-                            </li>
-                            <li class="submenu-item  {{ Route::is('barang.*') ? 'active' : '' }}">
-                                <a href="{{ route('barang.index') }}" class='submenu-link'>
-                                    Barang
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    class="sidebar-item {{ Request::routeIs('satuan.*', 'barang.*', 'kategori.*') ? 'active' : '' }} has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-box2-fill"></i>
+                        <span>Barang</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item {{ Route::is('satuan.*') ? 'active' : '' }} ">
+                            <a href="{{ route('satuan.index') }}" class='submenu-link'>
+                                Satuan
+                            </a>
+                        </li>
+                        <li class="submenu-item {{ Route::is('kategori.*') ? 'active' : '' }} ">
+                            <a href="{{ route('kategori.index') }}" class='submenu-link'>
+                                Kategori
+                            </a>
+                        </li>
+                        <li class="submenu-item  {{ Route::is('barang.*') ? 'active' : '' }}">
+                            <a href="{{ route('barang.index') }}" class='submenu-link'>
+                                Barang
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-title">Transaksi</li>
+                <li
+                    class="sidebar-item {{ Request::routeIs('barang-masuk.*') ? 'active' : '' }} has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-box2-fill"></i>
+                        <span>Barang Masuk</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item {{ Route::is('barang-masuk.index', 'barang-masuk.show') ? 'active' : '' }} ">
+                            <a href="{{ route('barang-masuk.index') }}" class='submenu-link'>
+                                Data Barang Masuk
+                            </a>
+                        </li>
+                        <li class="submenu-item {{ Route::is('barang-masuk.create') ? 'active' : '' }} ">
+                            <a href="{{ route('barang-masuk.create') }}" class='submenu-link'>
+                                Tambah Barang Masuk
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
             </ul>
         </div>

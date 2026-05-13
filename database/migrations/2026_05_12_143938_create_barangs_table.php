@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('kode', 50)->unique();
             $table->string('nama', 50);
             $table->integer('stock')->default(0);
-            $table->bigInteger('harga')->default(0);
             $table->unsignedBigInteger('satuan_id');
             $table->unsignedBigInteger('kategori_id');
             $table->text('catatan')->nullable();
