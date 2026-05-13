@@ -102,4 +102,41 @@ class BarangController extends Controller
     {
         return Excel::download(new BarangExport, 'barang.xlsx');
     }
+
+    /**
+     * API untuk Search Barang (Select2)
+     */
+    public function searchBarang(Request $request)
+    {
+        $cari = $request->q;
+        $barangs = Barang::query()
+                    ->with(['satuan', 'kategori'])
+                    ->where(function($query) use ($cari) {
+                        $query->where('kode', 'LIKE', "%$cari%")
+                                ->orWhere('nama', 'LIKE', "%$cari%");
+                    })
+                    ->limit(20)
+                    ->get();
+
+        // Mapping hasil agar Select2 atau Frontend lebih mudah membaca nama relasi
+        $results = $barangs->map(function ($item) {
+            // Ambil nama satuan dan kategori dengan aman
+            $namaSatuan = $item->satuan->satuan ?? '-'; 
+            $namaKategori = $item->kategori->kategori ?? '-';
+
+            return [
+                'id'   => $item->id,
+                // Format text sesuai keinginan Anda untuk tampilan di dropdown Select2
+                'text' => $item->nama . " - (" . $item->kode . ") - " . $item->stock . " " . $namaSatuan,
+                'kode' => $item->kode,
+                'nama' => $item->nama,
+                
+                // CRITICAL: Pastikan KEY ini sama dengan yang dipanggil di JS (data.satuan)
+                'satuan'   => $namaSatuan, 
+                'kategori' => $namaKategori,
+            ];
+        });
+
+        return response()->json($results);
+    }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Buat Barang Masuk')
+@section('title', 'Buat Barang Keluar')
 
 @push('style')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -15,14 +15,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Tambah Barang Masuk</h3>
-                    <p class="text-subtitle text-muted">Input transaksi penerimaan barang ke gudang.</p>
+                    <h3>Tambah Barang Keluar</h3>
+                    <p class="text-subtitle text-muted">Input transaksi pengeluaran barang ke gudang.</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('barang-masuk.index') }}">Barang Masuk</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('barang-keluar.index') }}">Barang Keluar</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Tambah</li>
                         </ol>
                     </nav>
@@ -32,20 +32,37 @@
     </section>
 
     <section class="page-content">
-        <form action="{{ route('barang-masuk.store') }}" method="POST">
+        <form action="{{ route('barang-keluar.store') }}" method="POST">
             @csrf
             <div class="row">
+                @if(session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Gagal!</strong> {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Terjadi Kesalahan!</strong>
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <!-- Data Header -->
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group mb-3">
                                 <label for="no_transaksi">No. Transaksi</label>
-                                <input type="text" name="no_transaksi" class="form-control" value="BM-{{ date('YmdHis') }}" readonly>
+                                <input type="text" name="no_transaksi" class="form-control" value="BK-{{ date('YmdHis') }}" readonly>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="tanggal_masuk">Tanggal Masuk</label>
-                                <input type="date" name="tanggal_masuk" class="form-control" value="{{ date('Y-m-d') }}" required>
+                                <label for="tanggal_keluar">Tanggal Keluar</label>
+                                <input type="date" name="tanggal_keluar" class="form-control" value="{{ date('Y-m-d') }}" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="keterangan">Keterangan</label>
@@ -98,43 +115,6 @@
         </form>
     </section>
 
-    <!-- Modal Quick Add Barang -->
-    <div class="modal fade" id="modalBarangBaru" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Tambah Master Barang Baru</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group mb-3">
-                        <label>Nama Barang</label>
-                        <input type="text" id="new_nama_barang" class="form-control">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Satuan</label>
-                        <select id="new_satuan" class="form-control">
-                            @foreach ($satuans as $satuan)
-                                <option value="{{ $satuan->id }}">{{ $satuan->satuan }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Kategori</label>
-                        <select id="new_kategori" class="form-control">
-                            @foreach ($kategories as $kategori)
-                                <option value="{{ $kategori->id }}">{{ $kategori->kategori }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" id="btn-save-new-barang" class="btn btn-primary">Simpan Barang</button>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @push('script')
@@ -165,7 +145,7 @@
                 },
                 language: {
                     noResults: function() {
-                        return `<button type="button" class="btn btn-sm btn-outline-primary w-100" onclick="openModalBarang()">+ Barang Tidak Ada? Buat Baru</button>`;
+                        return `<button type="button" class="btn btn-sm btn-outline-primary w-100">Barang Tidak ditemukan.</button>`;
                     }
                 },
                 escapeMarkup: function(markup) { return markup; }
@@ -212,47 +192,6 @@
                 $(this).closest('tr').remove();
             });
 
-            // 4. Simpan Barang Baru via Modal (Quick Add)
-            $('#btn-save-new-barang').click(function() {
-                let nama = $('#new_nama_barang').val();
-                let satuan = $('#new_satuan').val();
-                let kategori = $('#new_kategori').val();
-
-                if (!nama) return alert('Nama barang wajib diisi!');
-
-                $.post("{{ route('barang-masuk.quick-store') }}", {
-                    _token: "{{ csrf_token() }}",
-                    nama_barang: nama,
-                    satuan: satuan,
-                    kategori: kategori
-                }, function(res) {
-                    let formattedText = res.nama + " - (" + res.kode + ") - " + res.stock + " " + res.nama_satuan ";
-                    // Masukkan ke Select2 dan pilih otomatis
-                    let newOption = new Option(formattedText, res.id, true, true);
-                    $(newOption).data('data', {
-                        id: res.id,
-                        text: formattedText,
-                        nama: res.nama,
-                        kode: res.kode,
-                        satuan: res.satuan, // Pastikan key 'satuan' ini sama dengan yang di logic Tambah List
-                        kategori: res.nama_kategori
-                    });
-                    
-                    $('#search-barang').append(newOption).trigger('change');
-                    
-                    $('#modalBarangBaru').modal('hide');
-                    $('#new_nama_barang').val('');
-                }).fail(function() {
-                    alert('Gagal menyimpan barang.');
-                });
-            });
         });
-
-        function openModalBarang() {
-            let currentSearch = $('.select2-search__field').val();
-            $('#modalBarangBaru').modal('show');
-            $('#new_nama_barang').val(currentSearch);
-            $('#search-barang').select2('close');
-        }
     </script>
 @endpush

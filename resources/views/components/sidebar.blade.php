@@ -107,6 +107,26 @@
                     </ul>
                 </li>
 
+                <li
+                    class="sidebar-item {{ Request::routeIs('barang-keluar.*') ? 'active' : '' }} has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-box2-fill"></i>
+                        <span>Barang Keluar</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item {{ Route::is('barang-keluar.index', 'barang-keluar.show') ? 'active' : '' }} ">
+                            <a href="{{ route('barang-keluar.index') }}" class='submenu-link'>
+                                Data Barang Keluar
+                            </a>
+                        </li>
+                        <li class="submenu-item {{ Route::is('barang-keluar.create') ? 'active' : '' }} ">
+                            <a href="{{ route('barang-keluar.create') }}" class='submenu-link'>
+                                Tambah Barang Keluar
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
             </ul>
         </div>
     </div>

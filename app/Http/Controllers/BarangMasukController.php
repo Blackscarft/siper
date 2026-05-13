@@ -36,7 +36,7 @@ class BarangMasukController extends Controller
         ]);
     }
 
-        /**
+    /**
      * Lihat Detail Riwayat Transaksi
      */
     public function show(int $id)
@@ -46,43 +46,6 @@ class BarangMasukController extends Controller
                                     ->withCount('details')
                                     ->findOrFail($id);
         return view('pages.barang_masuk.show', compact('barangMasuk'));
-    }
-
-    /**
-     * API untuk Search Barang (Select2)
-     */
-    public function searchBarang(Request $request)
-    {
-        $cari = $request->q;
-        $barangs = Barang::query()
-                    ->with(['satuan', 'kategori'])
-                    ->where(function($query) use ($cari) {
-                        $query->where('kode', 'LIKE', "%$cari%")
-                                ->orWhere('nama', 'LIKE', "%$cari%");
-                    })
-                    ->limit(20)
-                    ->get();
-
-        // Mapping hasil agar Select2 atau Frontend lebih mudah membaca nama relasi
-        $results = $barangs->map(function ($item) {
-            // Ambil nama satuan dan kategori dengan aman
-            $namaSatuan = $item->satuan->satuan ?? '-'; 
-            $namaKategori = $item->kategori->kategori ?? '-';
-
-            return [
-                'id'   => $item->id,
-                // Format text sesuai keinginan Anda untuk tampilan di dropdown Select2
-                'text' => $item->nama . " - (" . $item->kode . ") - " . $namaSatuan . " - [" . $namaKategori . "]",
-                'kode' => $item->kode,
-                'nama' => $item->nama,
-                
-                // CRITICAL: Pastikan KEY ini sama dengan yang dipanggil di JS (data.satuan)
-                'satuan'   => $namaSatuan, 
-                'kategori' => $namaKategori,
-            ];
-        });
-
-        return response()->json($results);
     }
 
     /**
@@ -115,6 +78,7 @@ class BarangMasukController extends Controller
             'id' => $barang->id,
             'nama' => $barang->nama,
             'kode' => $barang->kode,
+            'stok' => $barang->stok,
             'satuan' => $barang->satuan->satuan, // Sesuaikan field 'satuan' di tabel satuan
             'kategori' => $barang->kategori->kategori, // Sesuaikan field 'kategori' di tabel kategori
         ]);
