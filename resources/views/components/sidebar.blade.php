@@ -60,7 +60,7 @@
                     </a>
                 </li>
                 
-                <li class="sidebar-title">Master</li>
+                <li class="sidebar-title">Manajemen Persediaan</li>
                 <li
                     class="sidebar-item {{ Request::routeIs('satuan.*', 'barang.*', 'kategori.*') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
@@ -86,7 +86,6 @@
                     </ul>
                 </li>
 
-                <li class="sidebar-title">Manajemen Persediaan</li>
                 <li
                     class="sidebar-item {{ Request::routeIs('barang-masuk.*') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>

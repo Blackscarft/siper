@@ -26,6 +26,8 @@ class BarangDataTable extends DataTable
             ->editColumn('created_at', function ($data) {
                 return $data->created_at->locale('id')->translatedFormat('d F Y');
             })
+            ->editColumn('stock', fn($row) => '<span class="badge '. ($row->stock <= 5 ? 'bg-light-danger' : 'bg-light-success') .'">' . number_format($row->stock) . '</span>' )
+            ->editColumn('catatan', fn($row) => $row->catatan == null ? '-' : $row->catatan)
             ->editColumn('deleted_at', function ($data) {
                 $bedge = '';
                 if ($data->deleted_at == null) {
@@ -68,7 +70,7 @@ class BarangDataTable extends DataTable
 
                 return $actionBtn;
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'stock']);
     }
 
     /**
@@ -102,8 +104,9 @@ class BarangDataTable extends DataTable
         return [
             Column::make('kode')->title('Kode'),
             Column::make('nama'),
-            Column::make('satuan.satuan')->title('Satuan'),
             Column::make('kategori.kategori')->title('Kategori'),
+            Column::make('satuan.satuan')->title('Satuan'),
+            Column::make('stock')->title('Stock'),
             Column::make('catatan'),
             Column::computed('action')
                     ->exportable(false)
