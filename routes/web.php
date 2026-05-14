@@ -6,6 +6,7 @@ use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\KategoriBarangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SatuanBarangController;
+use App\Http\Controllers\TutupBukuController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,5 +54,11 @@ Route::middleware(['auth'])->group(function () {
     // Barang Keluar
     Route::get('/barang-keluar/{id}/pdf', [BarangKeluarController::class, 'exportPdf'])->name('barang-keluar.pdf');
     Route::resource('barang-keluar', BarangKeluarController::class)->except(['edit', 'update', 'destroy']);
+
+    // Tutup Buku
+    Route::get('tutup-buku/{id}/export', [TutupBukuController::class, 'export'])->name('tutup-buku.export');
+    Route::get('tutup-buku/{id}/pdf', [TutupBukuController::class, 'exportPdf'])->name('tutup-buku.pdf');
+    Route::get('tutup-buku/{tahun}/{bulan}', [TutupBukuController::class, 'show'])->name('tutup-buku.show');
+    Route::resource('tutup-buku', TutupBukuController::class)->except(['create', 'edit', 'show']);
 
 });

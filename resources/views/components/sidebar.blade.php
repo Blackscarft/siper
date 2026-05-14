@@ -86,11 +86,11 @@
                     </ul>
                 </li>
 
-                <li class="sidebar-title">Transaksi</li>
+                <li class="sidebar-title">Manajemen Persediaan</li>
                 <li
                     class="sidebar-item {{ Request::routeIs('barang-masuk.*') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-box2-fill"></i>
+                        <i class="bi bi-box-arrow-in-down"></i>
                         <span>Barang Masuk</span>
                     </a>
                     <ul class="submenu">
@@ -110,7 +110,7 @@
                 <li
                     class="sidebar-item {{ Request::routeIs('barang-keluar.*') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-box2-fill"></i>
+                        <i class="bi bi-box-arrow-up"></i>
                         <span>Barang Keluar</span>
                     </a>
                     <ul class="submenu">
@@ -125,6 +125,20 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+
+                <li class="sidebar-item  {{ Request::routeIs('tutup-buku.index') ? 'active' : '' }}">
+                    <a href="{{ route('tutup-buku.index') }}" class='sidebar-link'>
+                        <i class="bi bi-clipboard2-data-fill"></i>
+                        <span>Stock Opname</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item  {{ Request::routeIs('tutup-buku.index', 'tutup-buku.show') ? 'active' : '' }}">
+                    <a href="{{ route('tutup-buku.index') }}" class='sidebar-link'>
+                        <i class="bi bi-lock-fill"></i>
+                        <span>Tutup Buku</span>
+                    </a>
                 </li>
 
             </ul>
