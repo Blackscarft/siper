@@ -65,7 +65,7 @@ class StockOpnameController extends Controller
                 // Stok sistem harus dipaksa mengikuti Stok Fisik hasil temuan lapangan
                 $barang = Barang::findOrFail($barangId);
                 $barang->update([
-                    'stok' => $stokFisik
+                    'stock' => $stokFisik
                 ]);
             }
 

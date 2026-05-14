@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriBarangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SatuanBarangController;
@@ -28,9 +29,8 @@ require __DIR__ . '/auth.php';
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', function () {
-        return view('pages.index');
-    })->name('home');
+    // Dashboard
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     // user route
     Route::get('/user', [UserController::class, 'index'])->name('admin.user.index');
