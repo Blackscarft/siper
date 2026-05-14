@@ -130,7 +130,7 @@ class BarangController extends Controller
                 'text' => $item->nama . " - (" . $item->kode . ") - " . $item->stock . " " . $namaSatuan,
                 'kode' => $item->kode,
                 'nama' => $item->nama,
-                
+                'stock' => $item->stock,
                 // CRITICAL: Pastikan KEY ini sama dengan yang dipanggil di JS (data.satuan)
                 'satuan'   => $namaSatuan, 
                 'kategori' => $namaKategori,

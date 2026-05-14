@@ -68,6 +68,11 @@
                         <span>Barang</span>
                     </a>
                     <ul class="submenu">
+                        <li class="submenu-item  {{ Route::is('barang.*') ? 'active' : '' }}">
+                            <a href="{{ route('barang.index') }}" class='submenu-link'>
+                                Barang
+                            </a>
+                        </li>
                         <li class="submenu-item {{ Route::is('satuan.*') ? 'active' : '' }} ">
                             <a href="{{ route('satuan.index') }}" class='submenu-link'>
                                 Satuan
@@ -76,11 +81,6 @@
                         <li class="submenu-item {{ Route::is('kategori.*') ? 'active' : '' }} ">
                             <a href="{{ route('kategori.index') }}" class='submenu-link'>
                                 Kategori
-                            </a>
-                        </li>
-                        <li class="submenu-item  {{ Route::is('barang.*') ? 'active' : '' }}">
-                            <a href="{{ route('barang.index') }}" class='submenu-link'>
-                                Barang
                             </a>
                         </li>
                     </ul>
@@ -127,11 +127,24 @@
                     </ul>
                 </li>
 
-                <li class="sidebar-item  {{ Request::routeIs('tutup-buku.index') ? 'active' : '' }}">
-                    <a href="{{ route('tutup-buku.index') }}" class='sidebar-link'>
+                <li
+                    class="sidebar-item {{ Request::routeIs('stock-opname.index','stock-opname.create') ? 'active' : '' }} has-sub">
+                    <a href="#" class='sidebar-link'>
                         <i class="bi bi-clipboard2-data-fill"></i>
                         <span>Stock Opname</span>
                     </a>
+                    <ul class="submenu">
+                        <li class="submenu-item  {{ Request::routeIs('stock-opname.index') ? 'active' : '' }}">
+                            <a href="{{ route('stock-opname.index') }}" class='submenu-link'>
+                                Data Stock Opname
+                            </a>
+                        </li>
+                        <li class="submenu-item {{ Route::is('stock-opname.create') ? 'active' : '' }} ">
+                            <a href="{{ route('stock-opname.create') }}" class='submenu-link'>
+                                Tambah Stock Opname
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="sidebar-item  {{ Request::routeIs('tutup-buku.index', 'tutup-buku.show') ? 'active' : '' }}">

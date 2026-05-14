@@ -6,6 +6,7 @@ use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\KategoriBarangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SatuanBarangController;
+use App\Http\Controllers\StockOpnameController;
 use App\Http\Controllers\TutupBukuController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,11 @@ Route::middleware(['auth'])->group(function () {
     // Barang Keluar
     Route::get('/barang-keluar/{id}/pdf', [BarangKeluarController::class, 'exportPdf'])->name('barang-keluar.pdf');
     Route::resource('barang-keluar', BarangKeluarController::class)->except(['edit', 'update', 'destroy']);
+
+    // Stock Opname
+    Route::get('/stock-opname/export/template', [StockOpnameController::class, 'exportTemplate'])->name('stock-opname.export-template');
+    Route::get('/stock-opname/{id}/pdf', [StockOpnameController::class, 'exportPdf'])->name('stock-opname.pdf');
+    Route::resource('stock-opname', StockOpnameController::class)->except(['edit', 'update', 'destroy']);
 
     // Tutup Buku
     Route::get('tutup-buku/{id}/export', [TutupBukuController::class, 'export'])->name('tutup-buku.export');
