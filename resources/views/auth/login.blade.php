@@ -1,44 +1,49 @@
 @extends('layouts.auth-v2')
 
 @section('content')
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100">
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-                    <span class="login100-form-title p-b-26 mb-3">
-                        Login
-                    </span>
-                    @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
-                            @foreach ($errors->all() as $error)
-                                {{ $error }}
-                            @endforeach
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-                        <input class="input100" type="email" name="email" value="{{ old('email') }}" required
-                            autocomplete="email" autofocus />
-                        <span class="focus-input100" data-placeholder="Email"></span>
-                    </div>
-
-                    <div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <span class="btn-show-pass">
-                            <i class="zmdi zmdi-eye"></i>
-                        </span>
-                        <input class="input100" type="password" name="password" required autocomplete="current-password" />
-                        <span class="focus-input100" data-placeholder="Password"></span>
-                    </div>
-
-                    <div class="container-login100-form-btn">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn">Login</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+<div class="main-wrapper">
+    <div class="login-section">
+        <div class="mb-5 text-center">
+            <h2 class="login-title">LOGIN</h2>
+            <p class="login-subtitle">Sistem Informasi Gudang</p>
         </div>
+
+        @if ($errors->any())
+            <div class="alert alert-danger border-0 small py-2">
+                @foreach ($errors->all() as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+            </div>
+        @endif
+
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            
+            <div class="input-group">
+                <span class="input-group-text"><i class="fa fa-user-o"></i></span>
+                <input type="email" name="email" class="form-control" 
+                        placeholder="Username" value="{{ old('email') }}" required autofocus>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                <input type="password" name="password" class="form-control" 
+                        placeholder="Password" required>
+            </div>
+
+            <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-login">Login Now</button>
+            </div>
+        </form>
     </div>
+
+    <div class="visual-section">
+        <div style="position:absolute; top:10%; right:10%; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%;"></div>
+        
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/049/772/512/small/warehouse-worker-organizing-inventory-with-technology-transparent-background-image-illustration-png.png" 
+            alt="Login Illustration" class="visual-image">
+
+        <div style="position:absolute; bottom:5%; left:10%; width:60px; height:60px; background:rgba(255,255,255,0.15); border-radius:50%;"></div>
+    </div>
+</div>
 @endsection
