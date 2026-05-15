@@ -1,14 +1,8 @@
 # SIPER - Sistem Informasi Persediaan 📦
 
-<p align="center">
-  <img style="height: 6rem" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAyMDAgNjAiPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUsIDEwKSBzY2FsZSgxLjQpIj4KICAgIDxwYXRoIGQ9Ik0xOCAyTDIgOXYxOGwxNiA3IDE2LTdWOUwxOCAyWiIgZmlsbD0iIzQzNWViZSIvPgogICAgPHBhdGggZD0iTTE4IDJ2MTUuNWwxNi03TTE4IDE3LjVMMiA5LjVNMTggMzRWMTcuNSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTE4IDcuNUw2IDEyLjd2NS4zbDEyLTUuMiAxMiA1LjJ2LTUuM0wxOCA3LjVaIiBmaWxsPSIjNDFiYmRkIi8+CiAgPC9nPgogIDx0ZXh0IHg9IjYwIiB5PSI0OCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDIiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiM0MzVlYmUiPlNJUEVSPC90ZXh0Pgo8L3N2Zz4=" alt="Logo SIPER">
-</p>
-
-<p align="center">
-    <strong>Solusi manajemen stok barang dan gudang yang efisien, cepat, dan modern.</strong>
-</p>
-
-<center>
+<div align="center">
+  <img src="public/logo.svg" width="180" alt="SIPER Logo">
+  <strong>Solusi manajemen stok barang dan gudang yang efisien, cepat, dan modern.</strong>
 
 ![Laravel](https://img.shields.io/badge/Laravel-11.37.0-FF2D20.svg?logo=laravel&logoColor=red)
 ![PHP](https://img.shields.io/badge/php-8.2-%23777BB4.svg?&logo=php&logoColor=white)
@@ -18,7 +12,7 @@
 ![Composer](https://img.shields.io/badge/Composer-2.8.5-885630?logo=composer&logoColor=fff)
 
 ---
- </center>
+ </div>
 
 ## 🚀 Tentang SIPER
 **SIPER** adalah platform manajemen inventaris yang dirancang untuk mempermudah pemantauan stok barang. Dibangun dengan **Laravel 11** dan desain UI dari **Mazer Admin Dashboard**, aplikasi ini menawarkan pengalaman pengelolaan gudang yang intuitif bagi admin maupun petugas lapangan.
