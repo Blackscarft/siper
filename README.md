@@ -1,66 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SIPER - Sistem Informasi Persediaan 📦
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img style="height: 6rem" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAyMDAgNjAiPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUsIDEwKSBzY2FsZSgxLjQpIj4KICAgIDxwYXRoIGQ9Ik0xOCAyTDIgOXYxOGwxNiA3IDE2LTdWOUwxOCAyWiIgZmlsbD0iIzQzNWViZSIvPgogICAgPHBhdGggZD0iTTE4IDJ2MTUuNWwxNi03TTE4IDE3LjVMMiA5LjVNMTggMzRWMTcuNSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTE4IDcuNUw2IDEyLjd2NS4zbDEyLTUuMiAxMiA1LjJ2LTUuM0wxOCA3LjVaIiBmaWxsPSIjNDFiYmRkIi8+CiAgPC9nPgogIDx0ZXh0IHg9IjYwIiB5PSI0OCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDIiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiM0MzVlYmUiPlNJUEVSPC90ZXh0Pgo8L3N2Zz4=" alt="Logo SIPER">
 </p>
 
-## About Laravel
+<p align="center">
+    <strong>Solusi manajemen stok barang dan gudang yang efisien, cepat, dan modern.</strong>
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<center>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+![Laravel](https://img.shields.io/badge/Laravel-11.37.0-FF2D20.svg?logo=laravel&logoColor=red)
+![PHP](https://img.shields.io/badge/php-8.2-%23777BB4.svg?&logo=php&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.3-7952B3?logo=bootstrap&logoColor=fff)
+[![mazer-template](https://img.shields.io/badge/mazer%20template-435ebe?style=flat&logoColor=white)](https://zuramai.github.io/mazer/)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=fff)
+![Composer](https://img.shields.io/badge/Composer-2.8.5-885630?logo=composer&logoColor=fff)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
+ </center>
 
-## Learning Laravel
+## 🚀 Tentang SIPER
+**SIPER** adalah platform manajemen inventaris yang dirancang untuk mempermudah pemantauan stok barang. Dibangun dengan **Laravel 11** dan desain UI dari **Mazer Admin Dashboard**, aplikasi ini menawarkan pengalaman pengelolaan gudang yang intuitif bagi admin maupun petugas lapangan.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### ✨ Fitur Utama
+- 📊 **Dashboard Analitik**: Pantau total barang, kategori, dan transaksi secara visual.
+- 📦 **Manajemen Inventaris**: Pengelolaan data barang (CRUD) yang terstruktur.
+- 🔄 **Mutasi Barang**: Pencatatan otomatis barang masuk (Inbound) dan keluar (Outbound).
+- ⚖️ **Stock Opname**: Fitur rekonsiliasi untuk menyesuaikan jumlah stok di sistem dengan stok fisik di gudang secara periodik guna meminimalisir selisih.
+- 🔒 **Tutup Buku**: Penguncian data transaksi pada periode tertentu (bulanan/tahunan) untuk memastikan laporan tidak berubah dan saldo akhir menjadi saldo awal periode berikutnya.
+- 👤 **Multi-role Access**: Keamanan akses berdasarkan peran pengguna (Admin & Manager).
+- 📱 **Responsive Design**: Akses lancar melalui PC, Tablet, maupun Smartphone.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ⚙️ Panduan Instalasi
 
-## Laravel Sponsors
+Ikuti langkah-langkah berikut untuk memasang **SIPER** di lingkungan lokal Anda:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Persyaratan Sistem
+Pastikan perangkat Anda sudah terpasang:
+- PHP >= 8.1
+- Composer
+- Node.js & NPM
+- MySQL / MariaDB
 
-### Premium Partners
+### 2. Clone Repositori
+```bash
+git clone [https://github.com/username-anda/siper.git](https://github.com/username-anda/siper.git)
+cd siper
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 3. Instalasi Dependensi
+Instal library backend (PHP):
+```bash
+# Instal library Laravel
+composer install
+```
+### 4. Konfigurasi Environment
+Salin file konfigurasi ```.env.example``` menjadi ```.env``` dan generate unique key:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-## Contributing
+### 5. Pengaturan Database
+Buat database baru di panel MySQL Anda (misal: ```db_siper```), lalu sesuaikan baris berikut di file ```.env```:
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=db_siper
+DB_USERNAME=root
+DB_PASSWORD=
+```
+### 6. Migrasi dan Seeder
+Jalankan migrasi untuk membuat tabel dan isi data awal **(akun admin dan manager)**:
+```bash
+php artisan migrate --seed
+```
+### 7. Jalankan Server
+```bash
+# Di terminal baru, jalankan server Laravel
+php artisan serve
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 8. Akses & Login
+Akses aplikasi melalui browser di: ```http://localhost:8000``` kemudian dapat login dengan akun berikut:
+| Username | Password | Role |
+| -------- | -------  | ---- |
+| admin@tes.com  | adminrhs   | Admin |
+| manager@tes.com  | adminrhs   | Manager  |
 
-## Code of Conduct
+<br>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> Dibangun dengan ❤️ oleh <a href="https://www.instagram.com/agus_nugrh">Suga Ho.</a>
