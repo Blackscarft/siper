@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Inventory System - Login</title>
+    <title>{{ config('app.name', 'Laravel') }} - Login</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
-    <link rel="icon" type="image/png" href="{{ asset('auth/images/icons/favicon.ico') }}" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><g transform='translate(5, 10) scale(1.4)'><path d='M18 2L2 9v18l16 7 16-7V9L18 2z' fill='%23435ebe'/><path d='M18 2v15.5l16-7M18 17.5L2 9.5M18 34V17.5' stroke='%23fff' stroke-width='1.5' fill='none'/><path d='M18 7.5L6 12.7v5.3l12-5.2 12 5.2v-5.3L18 7.5z' fill='%2341bbdd'/></g></svg>">
+    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('auth/vendor/bootstrap/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -54,7 +55,7 @@
         .login-subtitle {
             font-size: 0.85rem;
             color: #6B7280;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         /* Input Styling */
@@ -101,7 +102,8 @@
 
         /* Button */
         .btn-login {
-            background-color: #6366F1;
+            /* background-color: #6366F1; */
+            background-color: #435ebe;
             color: white;
             border-radius: 12px;
             padding: 14px;
@@ -114,7 +116,7 @@
         /* Visual Section */
         .visual-section {
             flex: 1;
-            background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+            background: linear-gradient(135deg, #6366F1 0%, #435ebe 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -134,7 +136,5 @@
 </head>
 <body>
     @yield('content')
-    <script src="{{ asset('auth/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('auth/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 </body>
 </html>

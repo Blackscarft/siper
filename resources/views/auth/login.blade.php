@@ -4,8 +4,8 @@
 <div class="main-wrapper">
     <div class="login-section">
         <div class="mb-5 text-center">
-            <h2 class="login-title">LOGIN</h2>
-            <p class="login-subtitle">Sistem Informasi Gudang</p>
+            <img style="height: 4.5rem" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAyMDAgNjAiPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUsIDEwKSBzY2FsZSgxLjQpIj4KICAgIDxwYXRoIGQ9Ik0xOCAyTDIgOXYxOGwxNiA3IDE2LTdWOUwxOCAyWiIgZmlsbD0iIzQzNWViZSIvPgogICAgPHBhdGggZD0iTTE4IDJ2MTUuNWwxNi03TTE4IDE3LjVMMiA5LjVNMTggMzRWMTcuNSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTE4IDcuNUw2IDEyLjd2NS4zbDEyLTUuMiAxMiA1LjJ2LTUuM0wxOCA3LjVaIiBmaWxsPSIjNDFiYmRkIi8+CiAgPC9nPgogIDx0ZXh0IHg9IjYwIiB5PSI0OCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDIiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiM0MzVlYmUiPlNJUEVSPC90ZXh0Pgo8L3N2Zz4=" alt="Logo SIPER">
+            <p class="login-subtitle">Sistem Informasi Persediaan</p>
         </div>
 
         @if ($errors->any())
@@ -32,7 +32,7 @@
             </div>
 
             <div class="d-grid mt-4">
-                <button type="submit" class="btn btn-login">Login Now</button>
+                <button type="submit" class="btn btn-login btn-block" style="cursor: pointer;">Login</button>
             </div>
         </form>
     </div>
