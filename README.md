@@ -43,7 +43,7 @@ Pastikan perangkat Anda sudah terpasang:
 
 ### 2. Clone Repositori
 ```bash
-git clone [https://github.com/username-anda/siper.git](https://github.com/username-anda/siper.git)
+git clone https://github.com/Blackscarft/siper.git
 cd siper
 ```
 
