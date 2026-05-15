@@ -1,8 +1,10 @@
 # SIPER - Sistem Informasi Persediaan 📦
 
 <div align="center">
-  <img src="public/logo.svg" width="180" alt="SIPER Logo">
-  <strong>Solusi manajemen stok barang dan gudang yang efisien, cepat, dan modern.</strong>
+  <img src="public/logo.svg" width="500" alt="SIPER Logo">
+    <br>
+      <strong>Solusi manajemen stok barang dan gudang yang efisien, cepat, dan modern.</strong> 
+    <br><br>
 
 ![Laravel](https://img.shields.io/badge/Laravel-11.37.0-FF2D20.svg?logo=laravel&logoColor=red)
 ![PHP](https://img.shields.io/badge/php-8.2-%23777BB4.svg?&logo=php&logoColor=white)
