@@ -10,9 +10,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class BarangKeluarController extends Controller
+class BarangKeluarController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            // 1. Pastikan user setidaknya punya role 'admin' ATAU 'manager' untuk masuk ke halaman ini
+            new Middleware('role_or_permission:admin|manager', only: ['index', 'show', 'exportPdf']),
+
+             // 2. Batasi fungsi manipulasi data (create,store, update, destroy) HANYA untuk role 'admin'
+            // Manager otomatis tertolak karena tidak ada di daftar ini
+            new Middleware('role:admin', only: ['create', 'store']),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */

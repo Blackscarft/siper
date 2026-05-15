@@ -11,7 +11,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-lg-0">
-                    <li class="nav-item dropdown me-1">
+                    {{-- <li class="nav-item dropdown me-1">
                         <a class="nav-link active dropdown-toggle text-gray-600" href="#"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class='bi bi-envelope bi-sub fs-4'></i>
@@ -60,14 +60,14 @@
                                 <p class="text-center py-2 mb-0"><a href="#">See all notification</a></p>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
                 <div class="dropdown">
                     <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="user-menu d-flex">
                             <div class="user-name text-end me-3 d-none d-sm-block">
                                 <h6 class="mb-0 text-gray-600">{{ Auth::user()->name }}</h6>
-                                <p class="mb-0 text-sm text-gray-600">Administrator</p>
+                                <p class="mb-0 text-sm text-gray-600">{{ Auth::user()->getRoleNames()->first() }}</p>
                             </div>
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">

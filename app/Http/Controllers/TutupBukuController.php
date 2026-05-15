@@ -12,9 +12,23 @@ use App\Models\TransaksiMasukDetail;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class TutupBukuController extends Controller
+class TutupBukuController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            // 1. Pastikan user setidaknya punya role 'admin' ATAU 'manager' untuk masuk ke halaman ini
+            new Middleware('role_or_permission:admin|manager', only: ['index', 'show', 'export','exportPdf']),
+
+             // 2. Batasi fungsi manipulasi data (create,store, update, destroy) HANYA untuk role 'admin'
+            // Manager otomatis tertolak karena tidak ada di daftar ini
+            new Middleware('role:admin', only: ['store']),
+        ];
+    }
+
     public function index(TutupBukuDataTable $dataTable) {
         return $dataTable->render('pages.tutup_buku.index');
     }

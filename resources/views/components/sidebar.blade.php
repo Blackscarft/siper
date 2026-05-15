@@ -61,6 +61,8 @@
                 </li>
                 
                 <li class="sidebar-title">Manajemen Persediaan</li>
+                
+                @role('admin')
                 <li
                     class="sidebar-item {{ Request::routeIs('satuan.*', 'barang.*', 'kategori.*') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
@@ -85,7 +87,6 @@
                         </li>
                     </ul>
                 </li>
-
                 <li
                     class="sidebar-item {{ Request::routeIs('barang-masuk.*') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
@@ -105,7 +106,6 @@
                         </li>
                     </ul>
                 </li>
-
                 <li
                     class="sidebar-item {{ Request::routeIs('barang-keluar.*') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
@@ -125,7 +125,6 @@
                         </li>
                     </ul>
                 </li>
-
                 <li
                     class="sidebar-item {{ Request::routeIs('stock-opname.index','stock-opname.create') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
@@ -145,6 +144,34 @@
                         </li>
                     </ul>
                 </li>
+                @endrole
+
+                @role('manager')
+                <li class="sidebar-item  {{ Request::routeIs('barang.index') ? 'active' : '' }}">
+                    <a href="{{ route('barang.index') }}" class='sidebar-link'>
+                        <i class="bi bi-box2-fill"></i>
+                        <span>Barang</span>
+                    </a>
+                </li>
+                <li class="sidebar-item  {{ Request::routeIs('barang-masuk.index', 'barang-masuk.show') ? 'active' : '' }}">
+                    <a href="{{ route('barang-masuk.index') }}" class='sidebar-link'>
+                        <i class="bi bi-box-arrow-in-down"></i>
+                        <span>Barang Masuk</span>
+                    </a>
+                </li>
+                <li class="sidebar-item  {{ Request::routeIs('barang-keluar.index', 'barang-keluar.show') ? 'active' : '' }}">
+                    <a href="{{ route('barang-keluar.index') }}" class='sidebar-link'>
+                        <i class="bi bi-box-arrow-up"></i>
+                        <span>Barang Keluar</span>
+                    </a>
+                </li>
+                <li class="sidebar-item  {{ Request::routeIs('stock-opname.index', 'barang-keluar.show') ? 'active' : '' }}">
+                    <a href="{{ route('stock-opname.index') }}" class='sidebar-link'>
+                        <i class="bi bi-clipboard2-data-fill"></i>
+                        <span>Stock Opname</span>
+                    </a>
+                </li>
+                @endrole
 
                 <li class="sidebar-item  {{ Request::routeIs('tutup-buku.index', 'tutup-buku.show') ? 'active' : '' }}">
                     <a href="{{ route('tutup-buku.index') }}" class='sidebar-link'>

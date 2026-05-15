@@ -226,7 +226,7 @@
                     satuan: satuan,
                     kategori: kategori
                 }, function(res) {
-                    let formattedText = res.nama + " - (" + res.kode + ") - " + res.stock + " " + res.nama_satuan ";
+                    let formattedText = `${res.nama} - (${res.kode}) - ${res.stock} ${res.satuan}`;
                     // Masukkan ke Select2 dan pilih otomatis
                     let newOption = new Option(formattedText, res.id, true, true);
                     $(newOption).data('data', {

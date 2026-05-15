@@ -17,16 +17,17 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-// Route::redirect('/dashboard', '/', 301);
+Route::redirect('/dashboard', '/', 301);
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__ . '/auth.php';
 
+Route::redirect('/dashboard', '/', 301);
 Route::middleware(['auth'])->group(function () {
 
     // Dashboard
@@ -42,29 +43,34 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'barang'], function () {
         Route::get('/export', [BarangController::class, 'export'])->name('barang.export');
         Route::get('/barang/search', [BarangController::class, 'searchBarang'])->name('barang.search');
-        Route::resource('satuan', SatuanBarangController::class)->except(['create', 'edit']);
-        Route::resource('kategori', KategoriBarangController::class)->except(['create', 'edit']);
+
+        Route::resource('satuan', SatuanBarangController::class)->except(['create', 'edit'])
+            ->middleware(['role:admin']);
+        Route::resource('kategori', KategoriBarangController::class)->except(['create', 'edit'])
+            ->middleware(['role:admin']);
     });
-    Route::resource('barang', BarangController::class)->except(['create', 'edit']);
+
+    Route::resource('barang', BarangController::class)->except(['create', 'edit']); // middleware di controller
 
     // Barang Masuk
-    Route::post('/barang-masuk/quick-barang', [BarangMasukController::class, 'quickStoreBarang'])->name('barang-masuk.quick-store');
+    Route::post('/barang-masuk/quick-barang', [BarangMasukController::class, 'quickStoreBarang'])->name('barang-masuk.quick-store')
+        ->middleware(['role:admin']);
     Route::get('/barang-masuk/{id}/pdf', [BarangMasukController::class, 'exportPdf'])->name('barang-masuk.pdf');
-    Route::resource('barang-masuk', BarangMasukController::class)->except(['edit', 'update', 'destroy']);
+    Route::resource('barang-masuk', BarangMasukController::class)->except(['edit', 'update', 'destroy']); // middleware di controller
 
     // Barang Keluar
     Route::get('/barang-keluar/{id}/pdf', [BarangKeluarController::class, 'exportPdf'])->name('barang-keluar.pdf');
-    Route::resource('barang-keluar', BarangKeluarController::class)->except(['edit', 'update', 'destroy']);
+    Route::resource('barang-keluar', BarangKeluarController::class)->except(['edit', 'update', 'destroy']); // middleware di controller
 
     // Stock Opname
-    Route::get('/stock-opname/export/template', [StockOpnameController::class, 'exportTemplate'])->name('stock-opname.export-template');
+    Route::get('/stock-opname/export/template', [StockOpnameController::class, 'exportTemplate'])->name('stock-opname.export-template')
+        ->middleware(['role:admin']);
     Route::get('/stock-opname/{id}/pdf', [StockOpnameController::class, 'exportPdf'])->name('stock-opname.pdf');
-    Route::resource('stock-opname', StockOpnameController::class)->except(['edit', 'update', 'destroy']);
+    Route::resource('stock-opname', StockOpnameController::class)->except(['edit', 'update', 'destroy']); // middleware di controller
 
     // Tutup Buku
     Route::get('tutup-buku/{id}/export', [TutupBukuController::class, 'export'])->name('tutup-buku.export');
     Route::get('tutup-buku/{id}/pdf', [TutupBukuController::class, 'exportPdf'])->name('tutup-buku.pdf');
     Route::get('tutup-buku/{tahun}/{bulan}', [TutupBukuController::class, 'show'])->name('tutup-buku.show');
-    Route::resource('tutup-buku', TutupBukuController::class)->except(['create', 'edit', 'show']);
-
+    Route::resource('tutup-buku', TutupBukuController::class)->except(['create', 'edit', 'show']); // middleware di controller
 });

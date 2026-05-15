@@ -11,9 +11,23 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\DataTables\StockOpnameDataTable;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class StockOpnameController extends Controller
+class StockOpnameController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            // 1. Pastikan user setidaknya punya role 'admin' ATAU 'manager' untuk masuk ke halaman ini
+            new Middleware('role_or_permission:admin|manager', only: ['index', 'show', 'exportPdf']),
+
+             // 2. Batasi fungsi manipulasi data (create,store, update, destroy) HANYA untuk role 'admin'
+            // Manager otomatis tertolak karena tidak ada di daftar ini
+            new Middleware('role:admin', only: ['create', 'store', 'exportTemplate']),
+        ];
+    }
+
     public function index(StockOpnameDataTable $dataTable){
         return $dataTable->render('pages.stock_opname.index');
     }

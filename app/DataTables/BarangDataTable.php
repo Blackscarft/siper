@@ -11,6 +11,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Support\Facades\Auth;
 
 class BarangDataTable extends DataTable
 {
@@ -101,19 +102,24 @@ class BarangDataTable extends DataTable
      */
     public function getColumns(): array
     {
-        return [
+        $columns = [
             Column::make('kode')->title('Kode'),
             Column::make('nama'),
             Column::make('kategori.kategori')->title('Kategori'),
             Column::make('satuan.satuan')->title('Satuan'),
             Column::make('stock')->title('Stock'),
-            Column::make('catatan'),
-            Column::computed('action')
-                    ->exportable(false)
-                    ->printable(false)
-                    ->width(60)
-                    ->addClass('text-center'),
+            Column::make('catatan')
         ];
+
+        if (Auth::check() && Auth::user()->hasRole('admin')) {
+            $columns[] = Column::computed('action')
+                            ->exportable(false)
+                            ->printable(false)
+                            ->width(60)
+                            ->addClass('text-center');
+        }
+
+        return $columns;
     }
 
     /**

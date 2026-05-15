@@ -179,15 +179,29 @@
                 </div>
                 <div class="card-body">
                     <div class="d-grid gap-2">
-                        <a href="{{ route('barang-masuk.create') }}" class="btn btn-success text-start">
-                            <i class="fa-solid fa-plus-square me-2"></i> Input Barang Masuk
-                        </a>
-                        <a href="{{ route('barang-keluar.create') }}" class="btn btn-danger text-start">
-                            <i class="bi bi-box-arrow-right"></i> Input Barang Keluar
-                        </a>
-                        <a href="{{ route('stock-opname.create') }}" class="btn btn-primary text-start">
-                            <i class="bi bi-clipboard-check"></i> Stock Opname Baru
-                        </a>
+                        @role('manager')
+                            <a href="{{ route('barang-masuk.index') }}" class="btn btn-success text-start">
+                                <i class="fa-solid fa-plus-square me-2"></i> Barang Masuk
+                            </a>
+                            <a href="{{ route('barang-keluar.index') }}" class="btn btn-danger text-start">
+                                <i class="bi bi-box-arrow-right"></i> Barang Keluar
+                            </a>
+                            <a href="{{ route('stock-opname.index') }}" class="btn btn-primary text-start">
+                                <i class="bi bi-clipboard-check"></i> Stock Opname
+                            </a>
+                        @endrole
+
+                        @role('admin')
+                            <a href="{{ route('barang-masuk.create') }}" class="btn btn-success text-start">
+                                <i class="fa-solid fa-plus-square me-2"></i> Input Barang Masuk
+                            </a>
+                            <a href="{{ route('barang-keluar.create') }}" class="btn btn-danger text-start">
+                                <i class="bi bi-box-arrow-right"></i> Input Barang Keluar
+                            </a>
+                            <a href="{{ route('stock-opname.create') }}" class="btn btn-primary text-start">
+                                <i class="bi bi-clipboard-check"></i> Stock Opname Baru
+                            </a>
+                        @endrole
                     </div>
                 </div>
             </div>

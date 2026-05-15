@@ -2,10 +2,6 @@
 
 @section('title', 'Barang')
 
-@push('style')
-    
-@endpush
-
 @section('main')
     <section class="page-heading">
         <div class="page-title">
@@ -28,6 +24,8 @@
     <section class="page-content">
         <div class="container-fluid">
             <div class="row">
+                {{-- Role manager tidak dapat menambah barang --}}
+                @unless(auth()->user()->hasRole('manager')) 
                 <div class="col-4">
                     <div class="card">
                         <form id="formBarang" class="needs-validation" data-parsley-validate>
@@ -97,7 +95,8 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-8">
+                @endunless
+                <div class="{{ auth()->user()->hasRole('manager') ? 'col-12' : 'col-8' }}">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h6>Data Barang</h6>
@@ -122,6 +121,7 @@
 
     {{ $dataTable->scripts() }}
 
+    @unless(auth()->user()->hasRole('manager'))
     <script>
         'use strict';
 
@@ -323,4 +323,6 @@
         defaultForm();
         handleFormSubmission();
     </script>
+    @endunless
+    
 @endpush

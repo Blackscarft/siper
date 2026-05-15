@@ -20,5 +20,13 @@ class UserSeeder extends Seeder
         ]);
 
         $admin->assignRole('admin');
+
+        $manager = User::create([
+            'name' => 'Manager',
+            'email' => 'manager@tes.com',
+            'password' => Hash::make('adminrhs')
+        ]);
+
+        $manager->assignRole('manager');
     }
 }

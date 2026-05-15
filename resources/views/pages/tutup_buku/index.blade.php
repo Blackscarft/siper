@@ -2,10 +2,6 @@
 
 @section('title', 'Tutup Buku')
 
-@push('style')
-    
-@endpush
-
 @section('main')
     <section class="page-heading">
         <div class="page-title">
@@ -29,6 +25,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- Kolom Form Eksekusi -->
+                @unless(auth()->user()->hasRole('manager'))
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
@@ -76,9 +73,10 @@
                         </div>
                     </div>
                 </div>
+                @endunless
 
                 <!-- Kolom Riwayat (DataTables) -->
-                <div class="col-lg-8">
+                <div class="{{ auth()->user()->hasRole('manager') ? 'col-12' : 'col-8' }}">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Riwayat Tutup Buku</h4>
