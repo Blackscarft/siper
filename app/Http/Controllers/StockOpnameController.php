@@ -64,7 +64,7 @@ class StockOpnameController extends Controller implements HasMiddleware
                 $stokSistem = $request->stok_sistem[$key];
                 $stokFisik  = $request->stok_fisik[$key];
                 $selisih    = $stokFisik - $stokSistem;
-                $catatan    = $request->catatan[$key];
+                $catatan    = $request->catatan[$key];      
 
                 // Simpan ke tabel detail untuk audit trail
                 $opname->details()->create([

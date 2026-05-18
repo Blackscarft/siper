@@ -183,7 +183,7 @@
                             ${data.text}
                         </td>
                         <td>
-                            <input type="text" name="catatan[]" class="form-control form-control-sm stok-sistem" value="">
+                            <input type="text" name="catatan[]" class="form-control form-control-sm" value="">
                         </td>
                         <td>
                             <input type="number" name="stok_sistem[]" class="form-control-plaintext stok-sistem" value="${data.stok_sekarang}" readonly>

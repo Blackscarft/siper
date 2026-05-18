@@ -15,6 +15,7 @@ class Barang extends Model
         'kode',
         'nama',
         'satuan_id',
+        'stock',
         'kategori_id',
         'catatan',
     ];
