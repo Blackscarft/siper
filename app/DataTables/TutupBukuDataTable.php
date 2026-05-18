@@ -3,14 +3,10 @@
 namespace App\DataTables;
 
 use App\Models\SaldoBulanan;
-use App\Models\TutupBuku;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class TutupBukuDataTable extends DataTable
@@ -23,6 +19,19 @@ class TutupBukuDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->editColumn('bulan', function ($data) {
+                // Mengubah angka bulan menjadi nama bulan Indonesia (Contoh: 1 -> Januari)
+                return \Carbon\Carbon::createFromFormat('m', $data->bulan)->locale('id')->translatedFormat('F');
+            })
+            ->editColumn('total_selisih_opname', function ($data) {
+                // Memberikan penanda warna atau simbol + / - supaya mudah dibaca
+                if ($data->total_selisih_opname > 0) {
+                    return '<span class="badge bg-success">+' . number_format($data->total_selisih_opname, 0, ',', '.') . '</span>';
+                } elseif ($data->total_selisih_opname < 0) {
+                    return '<span class="badge bg-danger">' . number_format($data->total_selisih_opname, 0, ',', '.') . '</span>';
+                }
+                return '<span class="text-muted">0</span>';
+            })
             ->editColumn('created_at', function ($data) {
                 return $data->created_at->locale('id')->translatedFormat('d F Y');
             })
@@ -41,7 +50,7 @@ class TutupBukuDataTable extends DataTable
                 
                 return '<div class="d-flex">' . $btnDetail . $btnCetak . $btnExcel . '</div>';
             })
-            ->rawColumns(['action', 'deleted_at']);
+            ->rawColumns(['action', 'total_selisih_opname']); // Tambahkan total_selisih_opname ke rawColumns agar badge HTML bisa dirender
     }
 
     /**
@@ -56,6 +65,7 @@ class TutupBukuDataTable extends DataTable
                 tahun, 
                 SUM(stok_masuk) as total_masuk, 
                 SUM(stok_keluar) as total_keluar, 
+                SUM(selisih_opname) as total_selisih_opname, -- Ambil sum total selisih opname
                 COUNT(barang_id) as total_barang,
                 MAX(created_at) as created_at',
                 []
@@ -87,15 +97,16 @@ class TutupBukuDataTable extends DataTable
         return [
             Column::make('bulan')->title('Bulan')->addClass('align-middle'),
             Column::make('tahun')->title('Tahun')->addClass('align-middle'),
+            Column::make('total_barang')->title('Total Jenis Barang')->addClass('align-middle'),
             Column::make('total_masuk')->title('Barang Masuk')->addClass('align-middle'),
             Column::make('total_keluar')->title('Barang Keluar')->addClass('align-middle'),
-            Column::make('total_barang')->title('Total Barang')->addClass('align-middle'),
+            Column::make('total_selisih_opname')->title('Total Selisih Opname')->addClass('align-middle text-center'), // Kolom Informasi Opname Baru
             Column::make('created_at')->title('Tanggal Eksekusi')->addClass('align-middle'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+                ->width(100)
+                ->addClass('text-center align-middle'),
         ];
     }
 

@@ -7,6 +7,7 @@ use App\DataTables\TutupBukuDetailDataTable;
 use App\Exports\SaldoBulananExport;
 use App\Models\Barang;
 use App\Models\SaldoBulanan;
+use App\Models\StockOpnameDetail;
 use App\Models\TransaksiKeluarDetail;
 use App\Models\TransaksiMasukDetail;
 use Illuminate\Http\Request;
@@ -78,9 +79,14 @@ class TutupBukuController extends Controller implements HasMiddleware
 
                     // HITUNG SELISIH OPNAME (Penting!)
                     // Jika ada selisih di stok opname bulan tersebut, harus dimasukkan ke kalkulasi
-                    // $selisihOpname = StokOpnameDetail::whereHas('header', ...)->sum('selisih');
+                    $selisihOpname = StockOpnameDetail::whereHas('header', function($q) use ($bulan, $tahun) {
+                        $q->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun);
+                    })->where('barang_id', $barang->id)->sum('selisih');
 
-                    $stokAkhir = ($stokAwal + $masuk) - $keluar;
+                    // Rumus Stok Akhir disesuaikan dengan Selisih Opname
+                    // Jika selisih positif (misal +5) -> stok bertambah
+                    // Jika selisih negatif (misal -3) -> ditambah negatif sama dengan dikurang -> stok berkurang
+                    $stokAkhir = ($stokAwal + $masuk) - $keluar + $selisihOpname;
 
                     // 2. Gunakan updateOrCreate untuk mencegah duplikasi jika skema DB tidak unik
                     SaldoBulanan::updateOrCreate(
@@ -93,7 +99,8 @@ class TutupBukuController extends Controller implements HasMiddleware
                             'stok_awal'  => $stokAwal,
                             'stok_masuk' => $masuk,
                             'stok_keluar'=> $keluar,
-                            'stok_akhir' => $stokAkhir,
+                            'selisih_opname' => $selisihOpname,
+                            'stok_akhir' => $stokAkhir
                         ]
                     );
                 }

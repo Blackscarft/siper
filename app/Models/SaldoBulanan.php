@@ -16,6 +16,7 @@ class SaldoBulanan extends Model
         'stok_masuk',
         'stok_keluar',
         'stok_akhir',
+        'selisih_opname',
     ];
 
     public function barang(){
