@@ -82,7 +82,7 @@ class BarangMasukController extends Controller implements HasMiddleware
             'nama' => $request->nama_barang,
             'satuan_id' => $request->satuan,
             'kategori_id' => $request->kategori,
-            'stok' => 0, // Stok awal selalu 0
+            'stock' => 0, // Stok awal selalu 0
         ]);
 
         // Load relasi agar nama satuan dan kategorinya muncul di JSON
@@ -92,7 +92,7 @@ class BarangMasukController extends Controller implements HasMiddleware
             'id' => $barang->id,
             'nama' => $barang->nama,
             'kode' => $barang->kode,
-            'stok' => $barang->stok,
+            'stock' => $barang->stock,
             'satuan' => $barang->satuan->satuan, // Sesuaikan field 'satuan' di tabel satuan
             'kategori' => $barang->kategori->kategori, // Sesuaikan field 'kategori' di tabel kategori
         ]);
