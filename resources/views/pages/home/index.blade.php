@@ -29,14 +29,6 @@
             color: #fd7e14; 
         }
 
-        /* Utilitas untuk membuat 5 kolom sejajar di layar besar */
-        @media (min-width: 1200px) {
-            .col-lg-2-5 {
-                flex: 0 0 auto;
-                width: 20%;
-            }
-        }
-
         /* Background Colors dengan Transparansi (Soft Look) */
         /* .stats-icon.purple { background-color: #435ebe26; color: #435ebe; }
         .stats-icon.red    { background-color: #dc354526; color: #dc3545; }
@@ -56,7 +48,7 @@
             <!-- Row Widget Utama -->
             <div class="row">
                 <!-- Total Barang -->
-                <div class="col-6 col-md-4 col-lg-2-5"> <!-- Gunakan custom class atau col-lg-2 jika ingin 5 kolom sejajar -->
+                <div class="col-6 col-md-4 col-lg-3"> <!-- Gunakan custom class atau col-lg-2 jika ingin 5 kolom sejajar -->
                     <div class="card">
                         <div class="card-body px-3 py-4-5">
                             <div class="d-flex align-items-center">
@@ -73,7 +65,7 @@
                 </div>
 
                 <!-- Stok Menipis -->
-                <div class="col-6 col-md-4 col-lg-2-5">
+                <div class="col-6 col-md-4 col-lg-3">
                     <div class="card border border-danger">
                         <div class="card-body px-3 py-4-5">
                             <div class="d-flex align-items-center">
@@ -90,7 +82,7 @@
                 </div>
 
                 <!-- Barang Masuk (BARU) -->
-                <div class="col-6 col-md-4 col-lg-2-5">
+                <div class="col-6 col-md-4 col-lg-3">
                     <div class="card">
                         <div class="card-body px-3 py-4-5">
                             <div class="d-flex align-items-center">
@@ -107,7 +99,7 @@
                 </div>
 
                 <!-- Barang Keluar -->
-                <div class="col-6 col-md-4 col-lg-2-5">
+                <div class="col-6 col-md-4 col-lg-3">
                     <div class="card">
                         <div class="card-body px-3 py-4-5">
                             <div class="d-flex align-items-center">
@@ -123,8 +115,8 @@
                     </div>
                 </div>
 
-                <!-- Opname -->
-                <div class="col-6 col-md-4 col-lg-2-5">
+                {{-- <!-- Opname -->
+                <div class="col-6 col-md-4 col-lg-3">
                     <div class="card">
                         <div class="card-body px-3 py-4-5">
                             <div class="d-flex align-items-center">
@@ -138,7 +130,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <!-- Daftar Barang Stok Menipis -->
