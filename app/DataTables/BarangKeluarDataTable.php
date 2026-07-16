@@ -39,7 +39,18 @@ class BarangKeluarDataTable extends DataTable
      */
     public function query(TransaksiKeluar $model): QueryBuilder
     {
-        return $model->newQuery()->with(['admin', 'details'])->withCount('details as jumlah_barang')->orderBy('created_at', 'desc');
+        $query = $model->newQuery()->with(['admin', 'details'])->withCount('details as jumlah_barang')->orderBy('created_at', 'desc');
+        if (request()->filled('tanggal_awal') && request()->filled('tanggal_akhir')) {
+
+            $query->whereBetween(
+                'tanggal_keluar',
+                [
+                    request('tanggal_awal'),
+                    request('tanggal_akhir')
+                ]
+            );
+        }
+        return $query;
     }
 
     /**

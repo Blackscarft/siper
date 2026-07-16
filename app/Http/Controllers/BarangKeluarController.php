@@ -133,4 +133,54 @@ class BarangKeluarController extends Controller implements HasMiddleware
         // Download atau Stream (tampil di browser)
         return $pdf->stream('Detail-Barang-Keluar-' . $barangKeluar->kode_transaksi . '.pdf');
     }
+
+    public function exportPdfRange()
+    {
+        $start = request('start');
+        $end   = request('end');
+
+        $barangKeluar = TransaksiKeluar::with([
+                'admin',
+                'details.barang.satuan',
+                'details.barang.kategori'
+            ])
+            ->withCount('details')
+            ->withSum('details', 'jumlah')
+            ->whereBetween('tanggal_keluar', [$start, $end])
+            ->orderBy('tanggal_keluar')
+            ->get();
+
+        // Jumlah transaksi
+        $totalTransaksi = $barangKeluar->count();
+
+        // Jumlah jenis barang (unique)
+        $totalBarang = $barangKeluar
+            ->flatMap(function ($transaksi) {
+                return $transaksi->details->pluck('barang_id');
+            })
+            ->unique()
+            ->count();
+
+        // Jumlah seluruh qty
+        $totalItem = $barangKeluar
+            ->sum(function ($transaksi) {
+                return $transaksi->details->sum('jumlah');
+            });
+
+        $pdf = Pdf::loadView(
+            'pages.barang_keluar.pdf_range',
+            compact(
+                'barangKeluar',
+                'start',
+                'end',
+                'totalTransaksi',
+                'totalBarang',
+                'totalItem'
+            )
+        )->setPaper('a4', 'landscape');
+
+        return $pdf->stream(
+            'Detail-Barang-Keluar-' . $start . '-sampai-' . $end . '.pdf'
+        );
+    }
 }

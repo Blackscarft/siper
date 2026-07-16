@@ -39,7 +39,19 @@ class BarangMasukDataTable extends DataTable
      */
     public function query(TransaksiMasuk $model): QueryBuilder
     {
-        return $model->newQuery()->with(['admin', 'details'])->withCount('details as jumlah_barang')->orderBy('created_at', 'desc');
+        $query = $model->newQuery()->with(['admin', 'details'])->withCount('details as jumlah_barang')->orderBy('created_at', 'desc');
+        if (request()->filled('tanggal_awal') && request()->filled('tanggal_akhir')) {
+
+            $query->whereBetween(
+                'tanggal_masuk',
+                [
+                    request('tanggal_awal'),
+                    request('tanggal_akhir')
+                ]
+            );
+        }
+
+        return $query;
     }
 
     /**

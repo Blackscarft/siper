@@ -59,10 +59,13 @@ Route::middleware(['auth'])->group(function () {
     // Barang Masuk
     Route::post('/barang-masuk/quick-barang', [BarangMasukController::class, 'quickStoreBarang'])->name('barang-masuk.quick-store')
         ->middleware(['role:admin']);
+    
+    Route::get('/barang-masuk/pdf/range', [BarangMasukController::class, 'exportPdfRange'])->name('barang-masuk.pdf.range');
     Route::get('/barang-masuk/{id}/pdf', [BarangMasukController::class, 'exportPdf'])->name('barang-masuk.pdf');
     Route::resource('barang-masuk', BarangMasukController::class)->except(['edit', 'update', 'destroy']); // middleware di controller
 
     // Barang Keluar
+    Route::get('/barang-keluar/pdf/range', [BarangKeluarController::class, 'exportPdfRange'])->name('barang-keluar.pdf.range');
     Route::get('/barang-keluar/{id}/pdf', [BarangKeluarController::class, 'exportPdf'])->name('barang-keluar.pdf');
     Route::resource('barang-keluar', BarangKeluarController::class)->except(['edit', 'update', 'destroy']); // middleware di controller
 

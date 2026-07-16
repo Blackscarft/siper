@@ -26,6 +26,79 @@
     </section>
     <section>
         <div class="col-12">
+            {{-- Filter --}}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="bi bi-funnel"></i> Filter Data
+                    </h6>
+                </div>
+
+                <div class="card-body">
+                    <form id="formFilter">
+                        <div class="row align-items-end">
+
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">
+                                    Dari Tanggal
+                                </label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="tanggal_awal"
+                                    name="tanggal_awal">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">
+                                    Sampai Tanggal
+                                </label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="tanggal_akhir"
+                                    name="tanggal_akhir">
+                            </div>
+
+                            <div class="col-md-6 mt-3">
+                                <div class="d-flex justify-content-md-end gap-2">
+
+                                    <button
+                                        type="button"
+                                        id="btn-filter"
+                                        class="btn btn-primary">
+                                        <i class="bi bi-search"></i>
+                                        Terapkan
+                                    </button>
+
+                                    <button
+                                        type="reset"
+                                        id="btn-reset"
+                                        class="btn btn-light border">
+                                        <i class="bi bi-arrow-clockwise"></i>
+                                        Reset
+                                    </button>
+
+                                    <button
+                                        disabled
+                                        hidden
+                                        type="button"
+                                        id="btn-export"
+                                        class="btn btn-outline-success">
+                                        <i class="bi bi-file-earmark-pdf"></i>
+                                        Export PDF
+                                    </button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <h6>Data Barang Keluar</h6>
@@ -60,4 +133,75 @@
             });
         </script>
     @endif
+
+    <script>
+        $('#btn-filter').on('click', function() {
+            let tanggal_awal = $('#tanggal_awal').val();
+            let tanggal_akhir = $('#tanggal_akhir').val();
+
+            if (!tanggal_awal || !tanggal_akhir) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Silakan pilih tanggal awal dan tanggal akhir sebelum menerapkan filter.',
+                    showConfirmButton: true,
+                });
+                return;
+            }
+
+            if (tanggal_awal > tanggal_akhir) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Tanggal awal tidak boleh lebih besar dari tanggal akhir.',
+                    showConfirmButton: true,
+                });
+                return;
+            }
+
+            $('#btn-export').prop('disabled', false);
+            $('#btn-export').removeAttr('hidden');
+
+            $('#barangkeluar-table').DataTable().ajax.url('{{ route('barang-keluar.index') }}?tanggal_awal=' + tanggal_awal + '&tanggal_akhir=' + tanggal_akhir).load();
+        });
+
+        $('#btn-reset').on('click', function() {
+            $('#formFilter')[0].reset();
+            $('#btn-export').prop('disabled', true);
+            $('#btn-export').attr('hidden', true);
+            $('#barangkeluar-table').DataTable().ajax.url('{{ route('barang-keluar.index') }}').load();
+        });
+
+        $('#btn-export').click(function () {
+
+            let tanggal_awal  = $('#tanggal_awal').val();
+            let tanggal_akhir = $('#tanggal_akhir').val();
+
+            if (!tanggal_awal || !tanggal_akhir) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Silakan pilih tanggal awal dan tanggal akhir sebelum mengekspor data.',
+                    showConfirmButton: true,
+                });
+                return;
+            }
+
+            if (tanggal_awal > tanggal_akhir) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Tanggal awal tidak boleh lebih besar dari tanggal akhir.',
+                    showConfirmButton: true,
+                });
+                return;
+            }
+
+        const url = "{{ route('barang-keluar.pdf.range') }}" +
+            "?start=" + encodeURIComponent(tanggal_awal) +
+            "&end=" + encodeURIComponent(tanggal_akhir);
+
+        window.open(url, '_blank');
+        });
+    </script>
 @endpush
