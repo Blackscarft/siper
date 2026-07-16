@@ -12,6 +12,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Carbon\Carbon;
 
 class BarangKeluarDataTable extends DataTable
 {
@@ -26,6 +27,9 @@ class BarangKeluarDataTable extends DataTable
             ->addColumn('details', function($data) {
                 $detailUrl = route('barang-keluar.show', $data->id);
                 return '<a href="'.$detailUrl.'" class="btn btn-outline-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Detail"><i class="bi bi-eye"></i></a>';
+            })
+            ->editColumn('tanggal_keluar', function($data) {
+                return Carbon::parse($data->tanggal_keluar)->format('d-m-Y');
             })
             ->rawColumns(['details']);
     }
