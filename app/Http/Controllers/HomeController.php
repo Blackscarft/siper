@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index(Request $request) {
         if ($request->ajax()) {
-            $model = Barang::where('stock', '<=', 5)->with('satuan'); // Kriteria stock menipis
+            $model = Barang::where('stock', '<=', 5)->with('satuan')->orderBy('stock', 'asc'); // Kriteria stock menipis
             return datatables()->of($model)
                 ->addIndexColumn()
                 ->editColumn('stock', function($row) {

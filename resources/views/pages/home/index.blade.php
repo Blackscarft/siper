@@ -226,6 +226,7 @@
         $('#table-stock-menipis').DataTable({
             processing: true,
             serverSide: true,
+            order: false, // Nonaktifkan sorting default
             ajax: "{{ route('home') }}", // Sesuaikan dengan route dashboard Anda
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
