@@ -52,12 +52,24 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                
-                <li class="sidebar-item  {{ Request::routeIs('admin.user.index') ? 'active' : '' }}">
-                    <a href="{{ route('admin.user.index') }}" class='sidebar-link'>
+
+                <li class="sidebar-item  {{ Request::routeIs('admin.user.*') ? 'active' : '' }} has-sub">
+                    <a href="#" class='sidebar-link'>
                         <i class="bi bi-person-fill"></i>
                         <span>User</span>
                     </a>
+                    <ul class="submenu">
+                        <li class="submenu-item  {{ Route::is('admin.user.index') ? 'active' : '' }}">
+                            <a href="{{ route('admin.user.index') }}" class='submenu-link'>
+                                Profil
+                            </a>
+                        </li>
+                        <li class="submenu-item  {{ Route::is('admin.user.new') ? 'active' : '' }}">
+                            <a href="{{ route('admin.user.new') }}" class='submenu-link'>
+                                Tambah Akun
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 
                 <li class="sidebar-title">Manajemen Persediaan</li>

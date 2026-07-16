@@ -35,6 +35,10 @@ Route::middleware(['auth'])->group(function () {
 
     // user route
     Route::get('/user', [UserController::class, 'index'])->name('admin.user.index');
+
+    Route::get('/user/new', [UserController::class, 'createUser'])->name('admin.user.new');
+    Route::post('/user/new', [UserController::class, 'saveCreateUser'])->name('admin.user.create');
+
     Route::post('/user/update-profile', [UserController::class, 'updateProfile'])->name('admin.user.updateProfile');
     Route::post('/user/update-password', [UserController::class, 'updatePassword'])->name('admin.user.updatePassword');
     Route::post('/user/update-photo', [UserController::class, 'updatePhoto'])->name('admin.user.updatePhoto');

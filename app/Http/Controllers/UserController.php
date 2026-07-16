@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use App\DataTables\UsersDataTable;
 
 class UserController extends Controller
 {
@@ -121,4 +122,41 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Berhasil memperbaruhi password', 'photo' => 'profile/' . Auth::user()->id . '/' . $photo], 200);
     }
+
+    public function createUser(UsersDataTable $datatable)
+    {
+        // $roles = Role::get()->skip(1);
+        $roles = Role::get();
+        return $datatable->render('pages.user.new', [
+            'roles' => $roles
+        ]);
+    }
+
+    public function saveCreateUser(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()->toArray(),
+            ], 422);
+        }
+
+        $role = Role::where('id', $request->role)->first();
+        $roleName = $role->name;
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ])->assignRole($roleName);
+
+        return response()->json(['message' => 'Pembuatan akun berhasil'], 200);
+    }
+
 }
